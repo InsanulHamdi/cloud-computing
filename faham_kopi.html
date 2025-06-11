@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Faham Kopi - Pilih Pesananmu Di Sini</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#8B4513", secondary: "#D2B48C" },
+            borderRadius: {
+              none: "0px",
+              sm: "4px",
+              DEFAULT: "8px",
+              md: "12px",
+              lg: "16px",
+              xl: "20px",
+              "2xl": "24px",
+              "3xl": "32px",
+              full: "9999px",
+              button: "8px",
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css"
+    />
+    <style>
+      :where([class^="ri-"])::before {
+        content: "\f3c2";
+      }
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #fafafa;
+      }
+      .menu-section {
+        display: none;
+      }
+      .menu-section.active {
+        display: block;
+      }
+      .tab-button.active {
+        color: #8b4513;
+        border-bottom: 2px solid #8b4513;
+      }
+      input:focus {
+        outline: none;
+      }
+      .quote-style {
+        font-style: italic;
+        color: #5e4630;
+        font-size: 1.25 rem;
+        margin-top: 1rem;
+      }
+    </style>
+  </head>
+  <body class="bg-white">
+    <!-- Order Form Section -->
+
+    <div id="orderFormSection" class="pt-16 pb-20 px-5">
+      <!-- Nav Bar -->
+      <div
+        class="fixed top-0 w-full bg-white shadow-sm z-50 px-4 py-3 flex items-center justify-between"
+      >
+        <img src="img.jpg/logo.jpg" alt="Logo" class="h-16" />
+      </div>
+      <div class="mt-8 mb-2">
+        <h2 class="text-3xl text-primary font-[Pacifico] text-center mb-2">
+          Welcome to Faham Kopi
+        </h2>
+
+        <!-- Tambahkan quotes -->
+        <p class="text-center italic text-gray-600 text-lg max-w-xl mx-auto">
+          "Kopi bukan sekadar minuman, tapi cerita dalam setiap tegukan."
+        </p>
+      </div>
+      <div class="mt-6 mb-2">
+        <h1 class="text-2xl font-semibold text-gray-800">Detail Pesanan</h1>
+        <p class="text-gray-500 text-sm mt-1">
+          Silahkan isi detail pesanan di bawah untuk lanjut
+        </p>
+      </div>
+      <form id="orderForm" class="space-y-6">
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700 mb-1"
+            >Nama</label
+          >
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Isi nama anda"
+            required
+            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:ring-primary focus:border-primary"
+          />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-2"
+            >Tipe Layanan</label
+          >
+          <div class="grid grid-cols-2 gap-4">
+            <div
+              id="takeawayOption"
+              class="border border-gray-200 rounded-button p-4 flex flex-col items-center cursor-pointer service-option"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center bg-secondary/20 rounded-full mb-2"
+              >
+                <i class="ri-takeaway-line ri-lg text-primary"></i>
+              </div>
+              <span class="text-sm font-medium">Ambil Di Tempat</span>
+            </div>
+            <div
+              id="dineInOption"
+              class="border border-gray-200 rounded-button p-4 flex flex-col items-center cursor-pointer service-option"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center bg-secondary/20 rounded-full mb-2"
+              >
+                <i class="ri-restaurant-line ri-lg text-primary"></i>
+              </div>
+              <span class="text-sm font-medium">Makan Di Tempat</span>
+            </div>
+          </div>
+          <input type="hidden" id="serviceType" name="serviceType" value="" />
+        </div>
+        <div id="tableNumberContainer" class="hidden">
+          <label
+            for="tableNumber"
+            class="block text-sm font-medium text-gray-700 mb-1"
+            >Nomor Meja</label
+          >
+          <input
+            type="text"
+            id="tableNumber"
+            name="tableNumber"
+            placeholder="Isi nomor meja"
+            class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded focus:ring-primary focus:border-primary"
+          />
+        </div>
+        <button
+          type="submit"
+          id="continueToMenu"
+          class="w-full py-3 bg-primary text-white font-medium rounded-button flex items-center justify-center cursor-pointer"
+        >
+          Lanjutkan Ke Menu
+          <i class="ri-arrow-right-line ml-2"></i>
+        </button>
+      </form>
+    </div>
+    <!-- Menu Section -->
+    <div id="menuSection" class="hidden pt-16 pb-24">
+      <div
+        class="fixed top-0 w-full bg-white shadow-sm z-50 px-4 py-4 flex items-center"
+      >
+        <button
+          id="backToForm"
+          class="w-18 h-18 flex items-center justify-center mr-2 cursor-pointer"
+        >
+          <i class="ri-arrow-left-line ri-lg text-gray-700"></i>
+        </button>
+        <div class="text-lg font-medium">Pilih Pesanan</div>
+      </div>
+      <!-- Menu Tabs -->
+      <div class="flex border-b border-gray-200 px-4 mt-2">
+        <button
+          class="tab-button active py-3 px-4 text-sm font-medium"
+          data-tab="coffee"
+        >
+          Kopi
+        </button>
+        <button
+          class="tab-button py-3 px-4 text-sm font-medium"
+          data-tab="nonCoffee"
+        >
+          Non-Kopi
+        </button>
+        <button
+          class="tab-button py-3 px-4 text-sm font-medium"
+          data-tab="food"
+        >
+          Makanan
+        </button>
+      </div>
+      <!-- Coffee Menu -->
+      <div id="coffeeMenu" class="menu-section active p-4 space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/cappuccino.jpg"
+                alt="Cappuccino"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Cappuccino</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 45000</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/espresso.jpg"
+                alt="Espresso"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Espresso</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 35000</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/latte.jpg"
+                alt="Latte"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Latte</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 47500</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/mocha.jpg"
+                alt="Mocha"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Mocha</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 52500</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Non-Coffee Menu -->
+      <div id="nonCoffeeMenu" class="menu-section p-4 space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/matcha_latte.jpg"
+                alt="Matcha Latte"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Matcha Latte</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 55000</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/chai_latte.jpg"
+                alt="Chai Latte"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Chai Latte</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 49500</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/fresh_orange_juice.jpg"
+                alt="Fresh Orange Juice"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Orange Juice</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 42500</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/hot_chocolate.jpg"
+                alt="Hot Chocolate"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Hot Chocolate</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 47500</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Food Menu -->
+      <div id="foodMenu" class="menu-section p-4 space-y-4">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/croissant.jpg"
+                alt="Croissant"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Croissant</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 37500</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/chocolate_muffin.jpg"
+                alt="Chocolate Muffin"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Chocolate Muffin</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 39500</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/avocado_toast.jpg"
+                alt="Avocado Toast"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Avocado Toast</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 69500</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="menu-item bg-white rounded-lg shadow-sm overflow-hidden">
+            <div class="h-auto w-full overflow-hidden">
+              <img
+                src="img.jpg/chicken_sandwich.jpg"
+                alt="Chicken Sandwich"
+                class="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div class="p-3">
+              <h3 class="font-medium text-gray-800">Chicken Sandwich</h3>
+              <div class="flex justify-between items-center mt-2">
+                <span class="text-primary font-medium">Rp. 79500</span>
+                <div class="flex items-center">
+                  <button
+                    class="quantity-minus w-7 h-7 flex items-center justify-center bg-gray-100 rounded-full cursor-pointer"
+                  >
+                    <i class="ri-subtract-line text-gray-600"></i>
+                  </button>
+                  <span class="quantity-value mx-2 text-sm w-5 text-center"
+                    >0</span
+                  >
+                  <button
+                    class="quantity-plus w-7 h-7 flex items-center justify-center bg-primary rounded-full cursor-pointer"
+                  >
+                    <i class="ri-add-line text-white"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Order Summary Button -->
+      <div
+        id="orderSummaryButton"
+        class="fixed bottom-0 left-0 w-full bg-white shadow-lg border-t border-gray-200 p-4 hidden"
+      >
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <span id="totalItems" class="text-sm font-medium">0 items</span>
+            <span class="mx-2 text-gray-400">|</span>
+            <span id="totalAmount" class="text-sm font-medium">Rp. 0</span>
+          </div>
+        </div>
+        <button
+          id="proceedToPayment"
+          class="w-full py-3 bg-primary text-white font-medium rounded-button flex items-center justify-center cursor-pointer"
+        >
+          Lanjut Ke Pembayaran
+          <i class="ri-arrow-right-line ml-2"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Payment Section -->
+    <div id="paymentSection" class="hidden pt-16 pb-24">
+      <div
+        class="fixed top-0 w-full bg-white shadow-sm z-50 px-4 py-3 flex items-center"
+      >
+        <button
+          id="backToMenu"
+          class="w-8 h-8 flex items-center justify-center mr-2 cursor-pointer"
+        >
+          <i class="ri-arrow-left-line ri-lg text-gray-700"></i>
+        </button>
+        <div class="text-lg font-medium">Pembayaran</div>
+      </div>
+      <div class="p-4 space-y-6">
+        <div class="bg-white rounded-lg shadow-sm p-4">
+          <h3 class="font-medium text-gray-800 mb-3">Rincian Pesanan</h3>
+          <div id="orderItems" class="space-y-3">
+            <!-- Order items will be populated here -->
+          </div>
+          <div class="border-t border-gray-100 mt-4 pt-3">
+            <div class="flex justify-between text-sm">
+              <span class="text-gray-600">Subtotal</span>
+              <span id="subtotalAmount" class="font-medium">Rp. 0</span>
+            </div>
+            <div class="flex justify-between text-sm mt-2">
+              <span class="text-gray-600">Pajak (10%)</span>
+              <span id="taxAmount" class="font-medium">Rp. 0</span>
+            </div>
+            <div
+              class="flex justify-between font-medium mt-3 pt-3 border-t border-gray-100"
+            >
+              <span>Total</span>
+              <span id="finalAmount" class="text-primary">Rp. 0</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow-sm p-4">
+          <h3 class="font-medium text-gray-800 mb-3">Metode Pembayaran</h3>
+          <div class="grid grid-cols-2 gap-4">
+            <div
+              id="qrisOption"
+              class="border border-gray-200 rounded-button p-4 flex flex-col items-center cursor-pointer payment-option"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center bg-secondary/20 rounded-full mb-2"
+              >
+                <i class="ri-qr-code-line ri-lg text-primary"></i>
+              </div>
+              <span class="text-sm font-medium">QRIS</span>
+            </div>
+            <div
+              id="cashOption"
+              class="border border-gray-200 rounded-button p-4 flex flex-col items-center cursor-pointer payment-option"
+            >
+              <div
+                class="w-10 h-10 flex items-center justify-center bg-secondary/20 rounded-full mb-2"
+              >
+                <i class="ri-money-dollar-circle-line ri-lg text-primary"></i>
+              </div>
+              <span class="text-sm font-medium">Tunai</span>
+            </div>
+          </div>
+          <input type="hidden" id="paymentMethod" value="" />
+        </div>
+        <div class="mt-6">
+          <button
+            id="payNow"
+            class="w-full py-3 bg-primary text-white font-medium rounded-button flex items-center justify-center cursor-pointer"
+          >
+            Bayar Sekarang
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Cart Details Modal -->
+    <div
+      id="cartDetailsModal"
+      class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 hidden"
+    >
+      <div
+        class="bg-white rounded-lg p-6 w-11/12 max-w-md max-h-[80vh] flex flex-col"
+      >
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-lg font-medium">Cart Details</h3>
+          <button
+            id="closeCartModal"
+            class="w-8 h-8 flex items-center justify-center text-gray-500"
+          >
+            <i class="ri-close-line ri-lg"></i>
+          </button>
+        </div>
+        <div id="cartItemsList" class="flex-1 overflow-y-auto space-y-4">
+          <!-- Cart items will be populated here -->
+        </div>
+        <div class="border-t border-gray-100 mt-4 pt-4">
+          <div class="flex justify-between text-sm mb-2">
+            <span class="text-gray-600">Subtotal</span>
+            <span id="cartModalSubtotal" class="font-medium">Rp. 0</span>
+          </div>
+          <div class="flex justify-between text-sm mb-4">
+            <span class="text-gray-600">Tax (10%)</span>
+            <span id="cartModalTax" class="font-medium">Rp. 0</span>
+          </div>
+          <div class="flex justify-between font-medium text-lg">
+            <span>Total</span>
+            <span id="cartModalTotal" class="text-primary">Rp. 0</span>
+          </div>
+        </div>
+        <div class="flex gap-3 mt-6">
+          <button
+            id="cartModalClose"
+            class="flex-1 py-3 border border-gray-200 text-gray-700 font-medium rounded-button"
+          >
+            Close
+          </button>
+          <button
+            id="cartModalProceed"
+            class="flex-1 py-3 bg-primary text-white font-medium rounded-button"
+          >
+            Proceed
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Success Modal -->
+    <div
+      id="successModal"
+      class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50 hidden"
+    >
+      <div class="bg-white rounded-lg p-6 w-4/5 max-w-md">
+        <div class="flex flex-col items-center">
+          <div
+            class="w-16 h-16 flex items-center justify-center bg-green-100 rounded-full mb-4"
+          >
+            <i class="ri-check-line ri-2x text-green-500"></i>
+          </div>
+          <h3 class="text-xl font-medium text-gray-800 mb-2">
+            Pesanan Sukses!
+          </h3>
+          <p class="text-gray-600 text-center mb-6">
+            Pesanan anda telah berhasil dibuat.
+          </p>
+          <button
+            id="closeSuccessModal"
+            class="w-full py-3 bg-primary text-white font-medium rounded-button cursor-pointer"
+          >
+            Selesai
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const cartDetailsModal = document.getElementById("cartDetailsModal");
+        const cartItemsList = document.getElementById("cartItemsList");
+        const cartModalSubtotal = document.getElementById("cartModalSubtotal");
+        const cartModalTax = document.getElementById("cartModalTax");
+        const cartModalTotal = document.getElementById("cartModalTotal");
+        const closeCartModal = document.getElementById("closeCartModal");
+        const cartModalClose = document.getElementById("cartModalClose");
+        const cartModalProceed = document.getElementById("cartModalProceed");
+        function updateCartModal() {
+          cartItemsList.innerHTML = "";
+          let subtotal = 0;
+          cart.forEach((item, index) => {
+            const itemTotal = item.price * item.quantity;
+            subtotal += itemTotal;
+            cartItemsList.innerHTML += `
+      <div class="bg-gray-50 p-4 rounded-lg">
+      <div class="flex justify-between items-start mb-3">
+      <div>
+      <h4 class="font-medium">{item.name}</h4>
+      <p class="text-sm text-gray-500">Rp. ${item.price.toFixed(0)} each</p>
+      </div>
+      <button class="text-gray-400 hover:text-gray-600" onclick="removeCartItem(Rp. {index})">
+      <i class="ri-delete-bin-line"></i>
+      </button>
+      </div>
+      <div class="flex justify-between items-center">
+      <div class="flex items-center gap-3">
+      <button class="w-8 h-8 flex items-center justify-center bg-white rounded-full border border-gray-200"
+      onclick="updateCartItemQuantity(${index}, ${item.quantity - 1})">
+      <i class="ri-subtract-line text-gray-600"></i>
+      </button>
+      <span class="w-8 text-center">${item.quantity}</span>
+      <button class="w-8 h-8 flex items-center justify-center bg-white rounded-full border border-gray-200"
+      onclick="updateCartItemQuantity(${index}, ${item.quantity + 1})">
+      <i class="ri-add-line text-gray-600"></i>
+      </button>
+      </div>
+      <span class="font-medium">Rp. ${itemTotal.toFixed(0)}</span>
+      </div>
+      </div>
+      `;
+          });
+          const tax = subtotal * 0.1;
+          const total = subtotal + tax;
+          cartModalSubtotal.textContent = `Rp. ${subtotal.toFixed(0)}`;
+          cartModalTax.textContent = `Rp. ${tax.toFixed(0)}`;
+          cartModalTotal.textContent = `Rp. ${total.toFixed(0)}`;
+        }
+        window.removeCartItem = function (index) {
+          const item = cart[index];
+          const menuItem = document.querySelector(
+            `.menu-item:has(h3:contains('${item.name}'))`
+          );
+          if (menuItem) {
+            menuItem.querySelector(".quantity-value").textContent = "0";
+          }
+          cart.splice(index, 1);
+          updateOrderSummary();
+          updateCartModal();
+        };
+        window.updateCartItemQuantity = function (index, newQuantity) {
+          if (newQuantity >= 0) {
+            const item = cart[index];
+            const menuItem = document
+              .querySelector(`.menu-item h3:contains('${item.name}')`)
+              .closest(".menu-item");
+            menuItem.querySelector(".quantity-value").textContent = newQuantity;
+            if (newQuantity === 0) {
+              cart.splice(index, 1);
+            } else {
+              item.quantity = newQuantity;
+            }
+            updateOrderSummary();
+            updateCartModal();
+          }
+        };
+        closeCartModal.addEventListener("click", function () {
+          cartDetailsModal.classList.add("hidden");
+        });
+        cartModalClose.addEventListener("click", function () {
+          cartDetailsModal.classList.add("hidden");
+        });
+        cartModalProceed.addEventListener("click", function () {
+          cartDetailsModal.classList.add("hidden");
+          menuSection.classList.add("hidden");
+          paymentSection.classList.remove("hidden");
+          // Update payment section order summary
+          orderItems.innerHTML = "";
+          cart.forEach((item) => {
+            const itemTotal = (item.price * item.quantity).toFixed(0);
+            orderItems.innerHTML += `
+      <div class="flex justify-between items-center">
+      <div>
+      <span class="font-medium">${item.name}</span>
+      <span class="text-gray-500 text-sm ml-2">x${item.quantity}</span>
+      </div>
+      <span>Rp. ${itemTotal}</span>
+      </div>
+      `;
+          });
+          const subtotal = totalAmount;
+          const tax = subtotal * 0.1;
+          const total = subtotal + tax;
+          subtotalAmount.textContent = `Rp. ${subtotal.toFixed(0)}`;
+          taxAmount.textContent = `Rp. ${tax.toFixed(0)}`;
+          finalAmount.textContent = `Rp. ${total.toFixed(0)}`;
+        });
+        // Service Type Selection
+        const takeawayOption = document.getElementById("takeawayOption");
+        const dineInOption = document.getElementById("dineInOption");
+        const tableNumberContainer = document.getElementById(
+          "tableNumberContainer"
+        );
+        const serviceTypeInput = document.getElementById("serviceType");
+        takeawayOption.addEventListener("click", function () {
+          takeawayOption.classList.add("border-primary", "bg-secondary/10");
+          dineInOption.classList.remove("border-primary", "bg-secondary/10");
+          tableNumberContainer.classList.add("hidden");
+          serviceTypeInput.value = "takeaway";
+        });
+        dineInOption.addEventListener("click", function () {
+          dineInOption.classList.add("border-primary", "bg-secondary/10");
+          takeawayOption.classList.remove("border-primary", "bg-secondary/10");
+          tableNumberContainer.classList.remove("hidden");
+          serviceTypeInput.value = "dineIn";
+        });
+        // Form Submission
+        const orderForm = document.getElementById("orderForm");
+        const orderFormSection = document.getElementById("orderFormSection");
+        const menuSection = document.getElementById("menuSection");
+        orderForm.addEventListener("submit", function (e) {
+          e.preventDefault();
+          const name = document.getElementById("name").value;
+          const serviceType = serviceTypeInput.value;
+          if (!name) {
+            showToast("Silahkan isi nama anda");
+            return;
+          }
+          if (!serviceType) {
+            showToast("Silahkan pilih tipe layanan anda");
+            return;
+          }
+          if (serviceType === "dineIn") {
+            const tableNumber = document.getElementById("tableNumber").value;
+            if (!tableNumber) {
+              showToast("Silahkan isi nomor meja anda");
+              return;
+            }
+          }
+          orderFormSection.classList.add("hidden");
+          menuSection.classList.remove("hidden");
+        });
+        // Back to Form
+        const backToForm = document.getElementById("backToForm");
+        backToForm.addEventListener("click", function () {
+          menuSection.classList.add("hidden");
+          orderFormSection.classList.remove("hidden");
+        });
+        // Menu Tabs
+        const tabButtons = document.querySelectorAll(".tab-button");
+        const menuSections = document.querySelectorAll(".menu-section");
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", function () {
+            const tab = this.getAttribute("data-tab");
+            // Remove active class from all tabs
+            tabButtons.forEach((btn) => btn.classList.remove("active"));
+            menuSections.forEach((section) =>
+              section.classList.remove("active")
+            );
+            // Add active class to clicked tab
+            this.classList.add("active");
+            document.getElementById(`${tab}Menu`).classList.add("active");
+          });
+        });
+        // Quantity Buttons
+        const orderSummaryButton =
+          document.getElementById("orderSummaryButton");
+        const totalItemsElement = document.getElementById("totalItems");
+        const totalAmountElement = document.getElementById("totalAmount");
+        let totalItems = 0;
+        let totalAmount = 0;
+        const cart = [];
+        document.querySelectorAll(".quantity-plus").forEach((button) => {
+          button.addEventListener("click", function () {
+            const item = this.closest(".menu-item");
+            const quantityElement = item.querySelector(".quantity-value");
+            const itemName = item.querySelector("h3").textContent;
+            const itemPrice = parseFloat(
+              item
+                .querySelector(".text-primary")
+                .textContent.replace("Rp. ", "")
+            );
+            let quantity = parseInt(quantityElement.textContent);
+            quantity++;
+            quantityElement.textContent = quantity;
+            // Update cart
+            const existingItem = cart.find(
+              (cartItem) => cartItem.name === itemName
+            );
+            if (existingItem) {
+              existingItem.quantity = quantity;
+            } else {
+              cart.push({
+                name: itemName,
+                price: itemPrice,
+                quantity: quantity,
+              });
+            }
+            updateOrderSummary();
+          });
+        });
+        document.querySelectorAll(".quantity-minus").forEach((button) => {
+          button.addEventListener("click", function () {
+            const item = this.closest(".menu-item");
+            const quantityElement = item.querySelector(".quantity-value");
+            const itemName = item.querySelector("h3").textContent;
+            let quantity = parseInt(quantityElement.textContent);
+            if (quantity > 0) {
+              quantity--;
+              quantityElement.textContent = quantity;
+              // Update cart
+              const existingItemIndex = cart.findIndex(
+                (cartItem) => cartItem.name === itemName
+              );
+              if (existingItemIndex !== -1) {
+                if (quantity === 0) {
+                  cart.splice(existingItemIndex, 1);
+                } else {
+                  cart[existingItemIndex].quantity = quantity;
+                }
+              }
+              updateOrderSummary();
+            }
+          });
+        });
+        function updateOrderSummary() {
+          totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+          totalAmount = cart.reduce(
+            (sum, item) => sum + item.price * item.quantity,
+            0
+          );
+          totalItemsElement.textContent = `${totalItems} item${
+            totalItems !== 1 ? "s" : ""
+          }`;
+          totalAmountElement.textContent = `Rp. ${totalAmount.toFixed(0)}`;
+          if (totalItems > 0) {
+            orderSummaryButton.classList.remove("hidden");
+          } else {
+            orderSummaryButton.classList.add("hidden");
+          }
+        }
+        // Proceed to Payment
+        const proceedToPayment = document.getElementById("proceedToPayment");
+        const paymentSection = document.getElementById("paymentSection");
+        const orderItems = document.getElementById("orderItems");
+        const subtotalAmount = document.getElementById("subtotalAmount");
+        const taxAmount = document.getElementById("taxAmount");
+        const finalAmount = document.getElementById("finalAmount");
+        proceedToPayment.addEventListener("click", function () {
+          menuSection.classList.add("hidden");
+          paymentSection.classList.remove("hidden");
+          // Populate order items
+          orderItems.innerHTML = "";
+          cart.forEach((item) => {
+            const itemTotal = (item.price * item.quantity).toFixed(0);
+            orderItems.innerHTML += `
+      <div class="flex justify-between items-center">
+      <div>
+      <span class="font-medium">${item.name}</span>
+      <span class="text-gray-500 text-sm ml-2">x${item.quantity}</span>
+      </div>
+      <span>Rp. ${itemTotal}</span>
+      </div>
+      `;
+          });
+          // Calculate totals
+          const subtotal = totalAmount;
+          const tax = subtotal * 0.1;
+          const total = subtotal + tax;
+          subtotalAmount.textContent = `Rp. ${subtotal.toFixed(0)}`;
+          taxAmount.textContent = `Rp. ${tax.toFixed(0)}`;
+          finalAmount.textContent = `Rp. ${total.toFixed(0)}`;
+        });
+        // Back to Menu
+        const backToMenu = document.getElementById("backToMenu");
+        backToMenu.addEventListener("click", function () {
+          paymentSection.classList.add("hidden");
+          menuSection.classList.remove("hidden");
+        });
+        // Payment Method Selection
+        const qrisOption = document.getElementById("qrisOption");
+        const cashOption = document.getElementById("cashOption");
+        const paymentMethodInput = document.getElementById("paymentMethod");
+        qrisOption.addEventListener("click", function () {
+          qrisOption.classList.add("border-primary", "bg-secondary/10");
+          cashOption.classList.remove("border-primary", "bg-secondary/10");
+          paymentMethodInput.value = "qris";
+        });
+        cashOption.addEventListener("click", function () {
+          cashOption.classList.add("border-primary", "bg-secondary/10");
+          qrisOption.classList.remove("border-primary", "bg-secondary/10");
+          paymentMethodInput.value = "Tunai";
+        });
+        // Pay Now
+        const payNow = document.getElementById("payNow");
+        const successModal = document.getElementById("successModal");
+        payNow.addEventListener("click", function () {
+          const paymentMethod = paymentMethodInput.value;
+          if (!paymentMethod) {
+            showToast("Please select payment method");
+            return;
+          }
+          if (paymentMethod === "qris") {
+            // Show QR code modal
+            const qrModal = document.createElement("div");
+            qrModal.className =
+              "fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50";
+            qrModal.innerHTML = `
+      <div class="bg-white rounded-lg p-6 w-4/5 max-w-md">
+      <div class="flex flex-col items-center">
+      <div class="w-full aspect-square bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
+      <i class="ri-qr-code-line ri-5x text-gray-400"></i>
+      </div>
+      <p class="text-gray-600 text-center mb-4">Scan QR code untuk menyelesaikan pembayaran</p>
+      <div class="w-full flex justify-center">
+      <div class="animate-spin w-5 h-5 border-2 border-primary border-t-transparent rounded-full"></div>
+      </div>
+      </div>
+      </div>
+      `;
+            document.body.appendChild(qrModal);
+            // Simulate payment process
+            setTimeout(() => {
+              qrModal.remove();
+              successModal.querySelector("h3").textContent =
+                "Pembayaran Sukses!";
+              successModal.querySelector("p").textContent =
+                "Terima kasih sudah memesan. Pembayaran anda sudah diterima.";
+              successModal.classList.remove("hidden");
+            }, 3000);
+          } else if (paymentMethod === "Tunai") {
+            // Show waiting for confirmation modal
+            const waitingModal = document.createElement("div");
+            waitingModal.className =
+              "fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50";
+            waitingModal.innerHTML = `
+      <div class="bg-white rounded-lg p-6 w-4/5 max-w-md">
+      <div class="flex flex-col items-center">
+      <div class="w-16 h-16 flex items-center justify-center bg-blue-100 rounded-full mb-4">
+      <i class="ri-time-line ri-2x text-blue-500"></i>
+      </div>
+      <h3 class="text-xl font-medium text-gray-800 mb-2">Menunggu Untuk Konfirmasi Pesanan</h3>
+      <p class="text-gray-600 text-center mb-4">Harap tunggu selagi kami konfirmasi pesanan anda...</p>
+      <div class="w-full flex justify-center">
+      <div class="animate-spin w-5 h-5 border-2 border-primary border-t-transparent rounded-full"></div>
+      </div>
+      </div>
+      </div>
+      `;
+            document.body.appendChild(waitingModal);
+            // Simulate confirmation process
+            setTimeout(() => {
+              waitingModal.remove();
+              successModal.querySelector("h3").textContent =
+                "Pesanan Terkonfirmasi!";
+              successModal.querySelector("p").textContent =
+                "Terima kasih sudah memesan. Harap siapkan uang tunai untuk pembayaran.";
+              successModal.classList.remove("hidden");
+            }, 3000);
+          }
+        });
+        // Close Success Modal
+        const closeSuccessModal = document.getElementById("closeSuccessModal");
+        closeSuccessModal.addEventListener("click", function () {
+          successModal.classList.add("hidden");
+          // Reset everything
+          orderFormSection.classList.remove("hidden");
+          paymentSection.classList.add("hidden");
+          // Reset form
+          document.getElementById("name").value = "";
+          document.getElementById("serviceType").value = "";
+          document.getElementById("tableNumber").value = "";
+          takeawayOption.classList.remove("border-primary", "bg-secondary/10");
+          dineInOption.classList.remove("border-primary", "bg-secondary/10");
+          tableNumberContainer.classList.add("hidden");
+          // Reset cart
+          cart.length = 0;
+          document.querySelectorAll(".quantity-value").forEach((el) => {
+            el.textContent = "0";
+          });
+          updateOrderSummary();
+          // Reset payment method
+          paymentMethodInput.value = "";
+          qrisOption.classList.remove("border-primary", "bg-secondary/10");
+          cashOption.classList.remove("border-primary", "bg-secondary/10");
+        });
+        // Toast notification
+        function showToast(message) {
+          const toast = document.createElement("div");
+          toast.className =
+            "fixed bottom-20 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white px-4 py-2 rounded-lg z-50";
+          toast.textContent = message;
+          document.body.appendChild(toast);
+          setTimeout(() => {
+            toast.remove();
+          }, 3000);
+        }
+      });
+    </script>
+  </body>
+</html>
